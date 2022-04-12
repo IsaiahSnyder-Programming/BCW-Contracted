@@ -36,8 +36,8 @@ namespace Contracted.Services
 
         internal string Remove(int id, Account user)
         {
-            Company game = _compRepo.GetById(id);
-            if (game.creatorId != user.Id)
+            Company company = _compRepo.GetById(id);
+            if (company.creatorId != user.Id)
             {
                 throw new Exception("you can't do that, nice try.");
             }

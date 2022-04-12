@@ -84,10 +84,12 @@ SELECT
   --
   --
   CREATE TABLE IF NOT EXISTS contractors(
+    creatorId varchar(255) NOT NULL,
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts(id)
   ) default charset utf8 COMMENT '';
 --
   --
@@ -95,20 +97,26 @@ SELECT
 --
   --
 INSERT INTO
-  contractors(name)
-VALUES("Drake");
+  contractors(name, creatorId)
+VALUES("Drake", "621fe5d6dbe50cea2b338f0c");
 INSERT INTO
-  contractors(name)
-VALUES("Tamra");
+  contractors(name, creatorId)
+VALUES("Tamra", "621fe5d6dbe50cea2b338f0c");
 INSERT INTO
-  contractors(name)
-VALUES("Hannah");
+  contractors(name, creatorId)
+VALUES("Hannah", "621fe5d6dbe50cea2b338f0c");
 INSERT INTO
-  contractors(name)
-VALUES("Ty");
+  contractors(name, creatorId)
+VALUES("Ty", "621fe5d6dbe50cea2b338f0c");
 INSERT INTO
-  contractors(name)
-VALUES("Scott");
+  contractors(name, creatorId)
+VALUES("Scott", "621fe5d6dbe50cea2b338f0c");
+--
+  --
+SELECT
+  *
+FROM
+  contractors;
 --
   --
   --
