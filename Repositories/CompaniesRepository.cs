@@ -54,9 +54,9 @@ namespace Contracted.Repositories
         {
             string sql = @"
             INSERT INTO companies
-            (name, creatorId)
+            (name, location, creatorId)
             VALUES
-            (@Name, @CreatorId);
+            (@Name, @Location, @CreatorId);
             SELECT LAST_INSERT_ID();
             ";
             int id = _db.ExecuteScalar<int>(sql, companyData);
@@ -83,7 +83,8 @@ namespace Contracted.Repositories
             UPDATE
                 companies
             SET
-                name = @Name
+                name = @Name,
+                location = @Location
             WHERE
                 id = @Id;";
             _db.Execute(sql, original);

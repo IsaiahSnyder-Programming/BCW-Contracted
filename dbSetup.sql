@@ -9,11 +9,13 @@ CREATE TABLE IF NOT EXISTS accounts(
 --
 --
 CREATE TABLE IF NOT EXISTS companies(
+  creatorId varchar(255) NOT NULL,
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   name VARCHAR(255) NOT NULL,
-  location VARCHAR(255) NOT NULL
+  location VARCHAR(255) NOT NULL,
+  FOREIGN KEY (creatorId) REFERENCES accounts(id)
 ) default charset utf8 COMMENT '';
 --
 --
@@ -21,14 +23,26 @@ DROP TABLE companies;
 --
 --
 INSERT INTO
-  companies(name, location)
-VALUES("Tam & Hams Green Eggs and Jam", "Yeet Street");
+  companies(name, location, `creatorId`)
+VALUES(
+    "Tam & Hams Green Eggs and Jam",
+    "Yeet Street",
+    "621fe5d6dbe50cea2b338f0c"
+  );
 INSERT INTO
-  companies(name, location)
-VALUES("Tyler Scotts Brewery and Bar", "Yeet Street");
+  companies(name, location, `creatorId`)
+VALUES(
+    "Tyler Scotts Brewery and Bar",
+    "Yeet Street",
+    "621fe5d6dbe50cea2b338f0c"
+  );
 INSERT INTO
-  companies(name, location)
-VALUES("Drakes Donkeys", "Yeet Street");
+  companies(name, location, `creatorId`)
+VALUES(
+    "Drakes Donkeys",
+    "Yeet Street",
+    "621fe5d6dbe50cea2b338f0c"
+  );
 --
   --
 SELECT
@@ -41,6 +55,28 @@ DELETE FROM
   companies
 WHERE
   id = 1;
+--
+  --
+SELECT
+  c.*,
+  a.*
+FROM
+  companies c
+  JOIN accounts a
+WHERE
+  a.id = c.creatorId;
+--
+  --
+INSERT INTO
+  companies (name, location, creatorId)
+VALUES
+  (
+    "The Place",
+    "Yeet Street",
+    "621fe5d6dbe50cea2b338f0c"
+  );
+SELECT
+  LAST_INSERT_ID();
 --
   --
   --
